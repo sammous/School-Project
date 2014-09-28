@@ -16,7 +16,9 @@ r2, w2 = os.pipe()
 processId = os.fork()
 pid = processId
 childNumber = 0
-numberOfSignToSend = 10
+numberOfSignToSend = 20
+counterPlus = 0
+counterMinus = 0
 
 
 if pid != 0:
@@ -33,11 +35,11 @@ if pid != 0:
     #Send sign to pipes
     for i in range(numberOfSignToSend):
         if randrange(2) == 1:
-            print "Parent sent + in pipes \n"
+            print "Parent sent + in both pipes \n"
             w.write("+")
             w2.write("+")
         else:
-            print "Parent sent - in pipes \n"
+            print "Parent sent - in both pipes \n"
             w.write("-")
             w2.write("-")
     w.close()
@@ -55,18 +57,22 @@ else:
     pid = processId2
     if pid == 0:
         childNumber = 2
-    print "Child number %s pid is" % childNumber + " %s" %os.getpid()
+    print "Child number %s pid is %s\n" % (childNumber, os.getpid())
     if childNumber == 2:
         str2 = r2.read()
         print "Flow in second pipe"
         for l in str2:
             if l == "-":
+		counterMinus += 1
                 print l
+	print "Nomber of minus received :%s" % counterMinus
     else:
         str = r.read()
         print "Flow in first pipe"
         for l in str:
-           if l == "+":
-               print l
-    print "Child closing"
+            if l == "+":
+		counterPlus += 1
+                print l
+	print "Nomber of plus received :%s" % counterPlus
+    print "Child number %s closing" % childNumber
     sys.exit(0)
