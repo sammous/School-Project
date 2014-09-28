@@ -57,6 +57,7 @@ else:
     else:                #Actions done by child 2
         for l in listSigne:
             if l == "+":
+		print "+ removed"
                 listSigne.remove(l)
         w.write("Number of - is %s \n" %len(listSigne))
     w.close()
