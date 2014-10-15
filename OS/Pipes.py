@@ -2,7 +2,7 @@ __author__ = 'MACSAMI'
 
 import os
 import sys
-import time
+
 
 from random import randrange
 
@@ -16,7 +16,7 @@ r2, w2 = os.pipe()
 processId = os.fork()
 pid = processId
 childNumber = 0
-numberOfSignToSend = 20
+numberOfSignToSend = 30
 counterPlus = 0
 counterMinus = 0
 
